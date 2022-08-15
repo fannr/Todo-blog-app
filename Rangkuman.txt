@@ -1,0 +1,17 @@
+- FlowChart
+1. Membuat Design Template TodoApp yang sudah dipikirkan.
+2. Membuat Logic di dalam Javascript 
+    * Menangkap isi input
+    * Masukkan isi input kedalam array / data
+    * Membuat Generate Unik
+    * Tampilkan isi data input tdi ke dalam DOM
+    * Hapus & Edit data
+
+    - Advance / Lanjutan
+    * Membuat data yang sudah dilakukan dan belum dilakukan
+    * Ketika data diclick Ikon Success, Ia akan masuk ke array baru yang menampung data yang sudah di dilakukan.
+
+
+
+
+
