@@ -6,6 +6,12 @@
   font-family: "Quicksand", sans-serif;
 }
 
+.removeAll.hide,
+.removeAllCompleted.hide {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 h1 {
   font-weight: 700;
 }
@@ -72,7 +78,7 @@ p {
 
 .container__task a,
 button,
-.form a {
+.overlay a {
   border: 2px solid #5800ff;
   box-shadow: 0 10px 30px -5px rgba(88, 0, 255, 0.2);
   background: #5800ff;
@@ -84,7 +90,9 @@ button,
   transition: 0.3s;
 }
 
-.container__task a:hover {
+.container__task a:hover,
+button:hover,
+.overlay a:hover {
   opacity: 0.7;
 }
 
@@ -101,10 +109,6 @@ i {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 10px;
-  align-items: baseline;
-  justify-content: start;
-  /* max-height: 400px;
-  overflow-y: auto; */
   border-radius: 4px;
   padding: 10px 0;
 }
@@ -286,7 +290,7 @@ img {
   border-top: 2px solid white;
 }
 
-.form h2 {
+.overlay h2 {
   text-align: center;
   margin-bottom: 30px;
 }
@@ -333,46 +337,50 @@ textarea {
 .form__content {
   transition: 0.5s;
   width: 450px;
+  max-width: 100%;
   border: 2px solid #5800ff;
-  margin: auto;
+  margin: 10px;
   padding: 1.3em;
   border-radius: 4px;
   opacity: 0;
   transform: translateY(-40px);
   visibility: hidden;
-  transition-delay: 0.3s;
 }
 
 .form__content h2 {
   font-size: clamp(1rem, 2.5vw - 0.5rem, 2rem);
 }
 
-.overlay:target .form__content {
+.overlay.active .form__content {
   transform: translateY(0px);
   opacity: 1;
   visibility: visible;
+  z-index: 2;
 }
 
-.form {
-  width: 0;
-  height: 0;
+.overlay.active {
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+  top: 0;
+}
+
+.overlay {
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   position: fixed;
-  top: 0;
+  right: 0;
+  bottom: 0;
+  top: -1000px;
   left: 0;
-  z-index: 999;
-  transition: 0.5s;
+  transition: 0.5s !important;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.overlay:target {
-  width: auto;
-  height: auto;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
 }
 
 form button {

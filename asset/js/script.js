@@ -9,11 +9,14 @@ const totalTaskUnc = document.querySelector("#totalBlogUnc");
 const totalTaskCom = document.querySelector("#totalBlogCom");
 const addButton = document.querySelector(".addButton");
 const form = document.querySelector("form");
+const removeAll = document.querySelector(".removeAll");
+const removeAllCompleted = document.querySelector(".removeAllCompleted");
+const overlayForm = document.querySelector(".overlay");
 
 // UNCOMPLETED
 // Read a Data
 const LOCALSTORAGE = "TODO_APP";
-let dataTask;
+let dataTask = [];
 
 readData();
 function readData() {
@@ -21,24 +24,29 @@ function readData() {
   if (storageData != null) {
     dataTask = storageData;
     showData(storageData);
+  }
+
+  if (dataTask.length == 0) {
+    removeAll.classList.add("hide");
   } else {
-    dataTask = [];
+    removeAll.classList.remove("hide");
   }
 }
 
 // Create template for data
 function showData(data) {
-  let cardData = "";
   totalTaskUnc.innerHTML = data.length;
   if (data.length > 0) {
-    data.forEach((task, index) => {
-      cardData += `<div class="card">
+    cardContainerUnc.innerHTML = data
+      .map((task, index) => {
+        const { category, title, desc, date } = task;
+        return `<div class="card">
       <input type="hidden" value="${index}" id="idValue" />
             <div class="card__main">
-              <h4 class="card__category">${task.category}</h4>
-              <h3 class="card__title">${task.title}</h3>
+              <h4 class="card__category">${category}</h4>
+              <h3 class="card__title">${title}</h3>
               <p class="card__desc">
-              ${task.desc}
+              ${desc}
               </p>
             </div>
             <hr />
@@ -47,12 +55,12 @@ function showData(data) {
                 <img src="asset/images/lupi.jpg" alt="Luffy" />
                 <small>NoerraCode.</small>
               </div>
-              <small class="card__date">${task.date}</small>
+              <small class="card__date">${date}</small>
             </div>
     
             <div class="tooltip">
               <div class="tooltip__content">
-                <a href="#addtask" onclick="editData(${index})">Edit</a>
+                <a href="#" onclick="editData(${index})">Edit</a>
                 <a href="#" onclick="deleteData(${index})">Hapus</a>
               </div>
               <div class="tooltip__hover">
@@ -64,12 +72,11 @@ function showData(data) {
              <i class="bi bi-check2-all"></i>
             </a>
           </div>`;
-    });
+      })
+      .join(" ");
   } else {
-    cardData += `<p class="danger">Add new blog!</p>`;
+    cardContainerUnc.innerHTML = `<p class="danger">Add new blog!</p>`;
   }
-
-  cardContainerUnc.innerHTML = cardData;
 }
 
 // Add task
@@ -115,14 +122,13 @@ function deleteData(id) {
 }
 
 // Delete all Card
-const removeAll = document.querySelector(".removeAll");
 removeAll.addEventListener("click", removeAllData);
 function removeAllData(e) {
   e.preventDefault();
 
   const confirmUser = confirm("yakin?");
 
-  if (!confirmUser) return false;
+  if (!confirmUser) return;
 
   dataTask = [];
   localStorage.setItem(LOCALSTORAGE, JSON.stringify(dataTask));
@@ -142,16 +148,21 @@ function editData(id) {
   desc.value = task.desc;
 
   addButton.textContent = "Update Task";
+
+  overlayForm.classList.add("active");
 }
 
 // if click the addTask button, change the var isUpdate, resetForm, and textContent
 const addTask = document.querySelector("#addTask");
 addTask.addEventListener("click", function (e) {
+  e.preventDefault();
   isUpdate = false;
   isUpdateCompleted = false;
   resetForm();
 
   addButton.textContent = "Add Task";
+
+  overlayForm.classList.add("active");
 });
 
 // Reset the form
@@ -159,13 +170,17 @@ function resetForm() {
   category.value = "";
   title.value = "";
   desc.value = "";
-  document.location.href = "#";
+
+  overlayForm.classList.remove("active");
 }
 
 // Reset field
 const close = document.querySelector(".close");
-close.addEventListener("click", function () {
+close.addEventListener("click", function (e) {
+  e.preventDefault();
+
   isUpdate = false;
+  overlayForm.classList.remove("active");
 });
 
 // UpdateStorage
@@ -235,32 +250,38 @@ function alertMessage(message) {
 // COMPLETED
 const LOCALSTORAGECOMPLETED = "TODO_APP_COMPPLETED";
 let isUpdateCompleted = false;
-let dataTaskCompleted;
+let dataTaskCompleted = [];
 readDataCompleted();
 function readDataCompleted() {
   const storageCompleted = JSON.parse(
     localStorage.getItem(LOCALSTORAGECOMPLETED)
   );
 
-  if (storageCompleted == null) {
-    dataTaskCompleted = [];
-  } else {
+  if (storageCompleted != null) {
     dataTaskCompleted = storageCompleted;
     showDataCompleted(storageCompleted);
+  }
+
+  if (dataTaskCompleted.length == 0) {
+    removeAllCompleted.classList.add("hide");
+  } else {
+    removeAllCompleted.classList.remove("hide");
   }
 }
 
 function showDataCompleted(data) {
-  let cardData = "";
   totalTaskCom.innerHTML = data.length;
   if (data.length > 0) {
-    data.forEach((task, index) => {
-      cardData += `<div class="card">
+    cardContainerCom.innerHTML = data
+      .map((task, index) => {
+        const { category, title, desc, date } = task;
+        return `<div class="card">
+      <input type="hidden" value="${index}" id="idValue" />
             <div class="card__main">
-              <h4 class="card__category">${task.category}</h4>
-              <h3 class="card__title">${task.title}</h3>
+              <h4 class="card__category">${category}</h4>
+              <h3 class="card__title">${title}</h3>
               <p class="card__desc">
-              ${task.desc}
+              ${desc}
               </p>
             </div>
             <hr />
@@ -269,7 +290,7 @@ function showDataCompleted(data) {
                 <img src="asset/images/lupi.jpg" alt="Luffy" />
                 <small>NoerraCode.</small>
               </div>
-              <small class="card__date">${task.date}</small>
+              <small class="card__date">${date}</small>
             </div>
     
             <div class="tooltip">
@@ -282,12 +303,11 @@ function showDataCompleted(data) {
               </div>
             </div>
           </div>`;
-    });
+      })
+      .join(" ");
   } else {
-    cardData += `<p class="danger">Yuk Blog Uncompletednya di Selesain!</p>`;
+    cardContainerCom.innerHTML = `<p class="danger">Yuk Blog Uncompletednya di Selesain!</p>`;
   }
-
-  cardContainerCom.innerHTML = cardData;
 }
 
 function clickChecked(id) {
@@ -319,14 +339,13 @@ function deleteDataCompleted(id) {
 
 // DeleteAll CardCompleted
 
-const removeAllCompleted = document.querySelector(".removeAllCompleted");
 removeAllCompleted.addEventListener("click", deleteAllDataCompleted);
 function deleteAllDataCompleted(e) {
   e.preventDefault();
 
   const confirmUser = confirm("yakin?");
 
-  if (!confirmUser) return false;
+  if (!confirmUser) return;
 
   dataTaskCompleted = [];
 

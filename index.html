@@ -30,7 +30,7 @@
         </a>
       </div>
 
-      <div class="overlay form" id="addtask">
+      <div class="overlay" id="addtask">
         <div class="form__content">
           <h2>Add Your Task!</h2>
           <form>
@@ -62,8 +62,8 @@
               ></textarea>
             </div>
             <div class="form__input">
-              <button type="submit" class="addButton">Add Task</button>
               <a href="#" class="close">Close</a>
+              <button type="submit" class="addButton">Add Task</button>
             </div>
           </form>
         </div>
@@ -71,21 +71,22 @@
 
       <h2 class="uncompleted">Blog Uncompleted!</h2>
       <div class="container__task unc">
-        <p>Total Blog : <span id="totalBlogUnc"></span></p>
+        <p>Total Blog : <span id="totalBlogUnc">0</span></p>
         <a href="#" class="removeAll"
           >Remove All <i class="bi bi-trash3-fill"></i
         ></a>
       </div>
       <div class="card__containerUnc">
+        <p class="danger">Add new blog!</p>
       </div>
       
       <hr />
       <h2 class="completed">Blog Completed!</h2>
       <div class="container__task com">
-        <p>Total Blog : <span id="totalBlogCom"></span></p>
+        <p>Total Blog : <span id="totalBlogCom">0</span></p>
         <a href="#" class="removeAllCompleted">Remove All <i class="bi bi-trash3-fill"></i></a>
       </div>
-      <div class="card__containerCom">
+      <div class="card__containerCom"><p class="danger">Yuk Blog Uncompletednya di Selesain!</p>
       </div>
     </div>
 
