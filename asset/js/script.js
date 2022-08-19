@@ -61,8 +61,8 @@ function showData(data) {
     
             <div class="tooltip">
               <div class="tooltip__content">
-                <a href="#" onclick="editData(${index})">Edit</a>
-                <a href="#" onclick="deleteData(${index})">Hapus</a>
+                <a href="#" id="editA" onclick="editData(${index})">Edit</a>
+                <a href="#" id="deleteA" onclick="deleteData(${index})">Hapus</a>
               </div>
               <div class="tooltip__hover">
                 <span></span>
@@ -298,8 +298,8 @@ function showDataCompleted(data) {
     
             <div class="tooltip">
               <div class="tooltip__content">
-                <a href="#addtask" onclick="editDataCompleted(${index})">Edit</a>
-                <a href="#" onclick="deleteDataCompleted(${index})">Hapus</a>
+                <a href="#" id="editB" onclick="editDataCompleted(${index})" >Edit</a>
+                <a href="#" id="deleteB" onclick="deleteDataCompleted(${index})">Hapus</a>
               </div>
               <div class="tooltip__hover">
                 <span></span>
@@ -377,6 +377,32 @@ function editDataCompleted(id) {
 
 document.addEventListener("keyup", function (e) {
   if (e.key == "Escape") {
+    overlayForm.classList.remove("active");
+  }
+});
+
+document.addEventListener("click", function (e) {
+  if (
+    e.target.className != "form__content" &&
+    e.target.id != "addTask" &&
+    e.target.id != "formH2" &&
+    e.target.className != "addButton" &&
+    e.target.className != "bi bi-plus" &&
+    e.target.id != "labelCategory" &&
+    e.target.id != "form__category" &&
+    e.target.id != "form__title" &&
+    e.target.id != "form__desc" &&
+    e.target.id != "labelCategory" &&
+    e.target.id != "category" &&
+    e.target.id != "labelTitle" &&
+    e.target.id != "title" &&
+    e.target.id != "labelDesc" &&
+    e.target.id != "desc" &&
+    e.target.id != "editA" &&
+    e.target.id != "editB" &&
+    e.target.id != "deleteA" &&
+    e.target.id != "deleteB"
+  ) {
     overlayForm.classList.remove("active");
   }
 });

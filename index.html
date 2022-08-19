@@ -32,11 +32,11 @@
 
       <div class="overlay" id="addtask">
         <div class="form__content">
-          <h2></h2>
+          <h2 id="formH2"></h2>
           <form>
             <input type="hidden" id="idInput" value="" />
-            <div class="form__input">
-              <label for="category">Category</label>
+            <div class="form__input" id="form__category">
+              <label for="category" id="labelCategory">Category</label>
               <select name="category" id="category" required>
                 <option value="" selected>Choose the category</option>
                 <option value="FrontEnd">Front End</option>
@@ -44,8 +44,8 @@
                 <option value="BackEnd">Back End</option>
               </select>
             </div>
-            <div class="form__input">
-              <label for="title">Title</label>
+            <div class="form__input" id="form__title">
+              <label for="title" id="labelTitle">Title</label>
               <input
                 required
                 type="text"
@@ -53,8 +53,8 @@
                 placeholder="example: Javascript.."
               />
             </div>
-            <div class="form__input">
-              <label for="desc">Description</label>
+            <div class="form__input" id="form__desc">
+              <label for="desc" id="labelDesc">Description</label>
               <textarea
                 required
                 id="desc"
