@@ -12,6 +12,7 @@ const form = document.querySelector("form");
 const removeAll = document.querySelector(".removeAll");
 const removeAllCompleted = document.querySelector(".removeAllCompleted");
 const overlayForm = document.querySelector(".overlay");
+const h2Form = document.querySelector(".form__content h2");
 
 // UNCOMPLETED
 // Read a Data
@@ -147,7 +148,8 @@ function editData(id) {
   title.value = task.title;
   desc.value = task.desc;
 
-  addButton.textContent = "Update Task";
+  addButton.textContent = "Update Blog";
+  h2Form.textContent = "Edit Your Blog!";
 
   overlayForm.classList.add("active");
 }
@@ -160,7 +162,8 @@ addTask.addEventListener("click", function (e) {
   isUpdateCompleted = false;
   resetForm();
 
-  addButton.textContent = "Add Task";
+  addButton.textContent = "Add Blog";
+  h2Form.textContent = "Add Your Blog!";
 
   overlayForm.classList.add("active");
 });
@@ -366,5 +369,14 @@ function editDataCompleted(id) {
   title.value = task.title;
   desc.value = task.desc;
 
-  addButton.textContent = "Update Task";
+  addButton.textContent = "Update Blog";
+  h2Form.textContent = "Edit Your Blog!";
+
+  overlayForm.classList.add("active");
 }
+
+document.addEventListener("keyup", function (e) {
+  if (e.key == "Escape") {
+    overlayForm.classList.remove("active");
+  }
+});
