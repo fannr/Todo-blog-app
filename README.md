@@ -1,2 +1,3 @@
 # Todo-blog-app
-use localstorage
+
+make a todo list using local storage javascript
